@@ -2,18 +2,14 @@
 node_modules/
 
 # Ignore build output files
-build/
-dist/
+/build
+/dist
 *.js.map
 
 # Ignore log files
 *.log
 
-# Ignore editor configuration files
-.vscode/
-.idea/
-*.sublime*
-*.swp
+
 
 
 
