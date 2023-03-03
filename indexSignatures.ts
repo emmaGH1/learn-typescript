@@ -75,3 +75,4 @@ const monthlyIncomes: Incomes = {
 for (const revenue in monthlyIncomes) {
     console.log(monthlyIncomes[revenue as keyof Incomes])
 }
+      
