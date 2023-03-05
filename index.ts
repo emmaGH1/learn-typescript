@@ -1,78 +1,63 @@
-const echo = <T>(arg: T): T => arg
+ //Partial Utility
 
-const isObj = <T>(arg: T): boolean => {
-    return (typeof arg === 'object' && !Array.isArray(arg) && arg !== null)
-}
-
-// console.log(isObj({name: 'emma'}))
-
-const isTrue = <T>(arg: T): { arg: T, is: boolean } => {
-    if (Array.isArray(arg) && !arg.length) {
-        return { arg, is: false}
-    }
-    else if (isObj(arg) && !Object.keys(arg as keyof T).length){
-      return { arg, is: false}
-    }
-    return { arg, is: !!arg}
-}
-
-// console.log(isTrue(['mia', 'ella']))
-// console.log(isTrue({}))
-
-interface BoolCheck<T> {
-    value: T,
-    is: boolean,
-}
-
-const checkBoolValue = <T>(arg: T): BoolCheck<T> => {
-    if (Array.isArray(arg) && !arg.length) {
-        return { value: arg, is: false}
-    }
-    if (isObj(arg) && !Object.keys(arg as keyof T).length) {
-        return { value: arg, is: false}
-    }
-    return { value: arg, is: !!arg}
-}
-
-type HasID = {
-   id: number
-}
-
-interface copyId extends HasID {
-    account: string
-}
-
-const processUser = <T extends HasID>(user: T): T => {
-    return user
+ // This helps to update an object without overwriting the object
+ interface Assignment {
+    studentId: string
+    title: string
+    grade: number
+    verified?: boolean
  }
 
-//  console.log(processUser({name: 'emma', id: 2}))
+ const updateAssignment = (assign: Assignment, propsToUpdate: Partial<Assignment>): Assignment => {
+   return { ...assign, ...propsToUpdate}
+ }
 
-const getUsersProperty = <T extends copyId, K extends keyof T>(users: T[], key: K): T[K][] => {
-    return users.map(user => user[key])
+const assign1: Assignment = {
+   studentId: 'gly355',
+   title: 'Field Work',
+   grade: 92
 }
 
-// console.log(getUsersProperty([{id: 1, account: 'emma'}, {id: 3, account: 'ella'}], 'account'))
+// console.log(updateAssignment(assign1,{studentId: 'CompEng 101'}))
 
-class StateObject<T> {
-    private value: T
+const assignGraded: Assignment = updateAssignment(assign1, { grade: 95})
 
-    constructor(value: T) {
-        this.value = value
-    }
+// Required and Readonly
 
-    get state(): T {
-        return this.value
-    }
-
-    set state(data: T) {
-        this.value = data
-    }
+const recordAssignment = (assign: Required<Assignment>): Assignment => {
+   return assign
 }
 
-const Homeboy = new StateObject('Ricch')
-// console.log(Homeboy.state)
+const assignVerified: Readonly<Assignment> = {
+   ...assignGraded, verified: true
+}
 
-const myState = new StateObject<(string | number | boolean)[]>([15]) 
-myState.state = [18, 19, 20, 21, 22]
-console.log(myState.state)
+recordAssignment({...assignVerified, verified: true})
+
+//Record
+
+const hexColorMap: Record<string, string> = {
+   red: "FF0000",
+   green: "00FF00",
+   blue: "0000FF"
+}
+
+type Students = "Sara" | "Kelly"
+type LetterGrades = "A" | "B" | "C" | "D" | "U"
+
+const finalGrades: Record<Students, LetterGrades> = {
+   Sara: "A",
+   "Kelly": "B"
+}
+
+interface Grades {
+   assign1: number,
+   assign2: number
+}
+
+const gradeData: Record<Students, Grades> = {
+   Sara: {assign1: 85, assign2: 93},
+   Kelly: { assign1: 76, assign2: 15}
+}
+
+//Pick and Omit
