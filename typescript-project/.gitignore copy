@@ -1,0 +1,16 @@
+
+# Ignore node_modules directory
+/node_modules
+
+# Ignore build output files
+/build
+/dist
+*.js.map
+
+# Ignore log files
+*.log
+
+
+
+
+
