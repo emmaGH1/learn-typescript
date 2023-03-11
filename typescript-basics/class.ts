@@ -86,7 +86,7 @@ const Renzy = new Peeps('Renzy')
 
 // console.log(Dan.id)
 // console.log(Sade.id)
-// console.log(Renzy.id)
+// console.log(Renzy.id)whtwhw
 // console.log(Peeps.count)
 
 class Bands {
