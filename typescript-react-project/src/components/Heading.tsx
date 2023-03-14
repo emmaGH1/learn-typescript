@@ -7,5 +7,5 @@ const Heading = ({ title }: HeadingProps): ReactElement => {
     <div>{title}</div>
   )
 }
-
+ 
 export default Heading  
